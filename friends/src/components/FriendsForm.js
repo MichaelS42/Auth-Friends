@@ -18,7 +18,7 @@ const FriendsForm = (props) => {
     const submit = e =>{
         e.preventDefault();
         axiosWithAuth()
-        .post('/friendsform', friend)
+        .post('/friends', friend)
         .then(res => console.log(res.data))
         .catch(err => console.log("err", err));
         setTimeout(() => { props.history.push('/protected') }, 2000)
@@ -37,7 +37,7 @@ const FriendsForm = (props) => {
                     </input>
                 <input 
                 type="text"
-                age="age"
+                name="age"
                 value={friend.age}
                 onChange={handleChanges}
                 placeholder="age"
@@ -45,7 +45,7 @@ const FriendsForm = (props) => {
                     </input>
                 <input 
                 type="text"
-                email="email"
+                name="email"
                 value={friend.email}
                 onChange={handleChanges}
                 placeholder="email"
