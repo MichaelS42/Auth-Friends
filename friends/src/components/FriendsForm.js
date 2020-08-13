@@ -1,24 +1,27 @@
 import React, { useState } from 'react';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 
-const FriendsForm = props =>{
-    const [value, setValue] = useState([]);
+const FriendsForm = (props) => {
+    const [friend, setFriend] = useState({
+        id: Date.now(),
+        name: "",
+        age: "",
+        email: "",
+    })
+        const handleChanges = e => {
+            setFriend({
+                ...friend,
+                [e.target.name]: e.target.value,
+            })
+        }
 
     const submit = e =>{
         e.preventDefault();
         axiosWithAuth()
-        .post('/friends', value)
-        .then(res=>{
-            console.log('MS: FriendsForm: submit ', res);
-            props.history.push('/FriendsList');
-        })
-    }
-
-    const handleChanges = e => {
-        setValue({
-            ...value,
-            [e.target.name]: e.target.value,
-        })
+        .post('/friendsform', friend)
+        .then(res => console.log(res.data))
+        .catch(err => console.log("err", err));
+        setTimeout(() => { props.history.push('/protected') }, 2000)
     }
 
     return(
@@ -27,24 +30,27 @@ const FriendsForm = props =>{
                 <input 
                 type="text"
                 name="name"
-                value={value.name}
+                value={friend.name}
                 onChange={handleChanges}
                 placeholder="name"
-                />
+                >
+                    </input>
                 <input 
                 type="text"
                 age="age"
-                value={value.age}
+                value={friend.age}
                 onChange={handleChanges}
                 placeholder="age"
-                />
+                >
+                    </input>
                 <input 
                 type="text"
                 email="email"
-                value={value.nemail}
+                value={friend.email}
                 onChange={handleChanges}
                 placeholder="email"
-                />
+                >
+                    </input>
                 <button>submit</button>
             </form>
         </div>

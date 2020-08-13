@@ -24,7 +24,6 @@ function App() {
           <PrivateRoute exact path="/protected" component={FriendsList} />
           <PrivateRoute exact path="/friendsform" component={FriendsForm} />
           <Route path="/login" component={Login} />
-          <Route component={Login} />
         </Switch>
       </div>
     </Router>
